@@ -10,6 +10,11 @@ pool:
   vmImage: ubuntu-latest
 
 steps:
+- task: dependabot@1
+  inputs:
+    packageManager: 'nuget'
+    versioningStrategy: 'auto'
+    dockerImageRepository: 'tingle/dependabot-azure-devops'
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
