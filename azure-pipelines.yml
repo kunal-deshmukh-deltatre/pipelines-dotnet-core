@@ -16,7 +16,7 @@ steps:
     packageManager: 'nuget'   
     versioningStrategy: 'auto'
     dockerImageRepository: 'tingle/dependabot-azure-devops'
-    extraEnvironmentVariables: 'AZURE_HOSTNAME=dev.azure.com'
+    extraEnvironmentVariables: 'EXCON_DEBUG=1'
 - script: echo Hello, world!
   displayName: 'Run a one-line script'
 
