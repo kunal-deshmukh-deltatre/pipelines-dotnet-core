@@ -12,8 +12,7 @@ pool:
 steps:
 - task: dependabot@1
   inputs:
-    packageManager: 'nuget'
-    targetBranch: 'master'
+    packageManager: 'nuget'   
     versioningStrategy: 'auto'
     dockerImageRepository: 'tingle/dependabot-azure-devops'
 - script: echo Hello, world!
