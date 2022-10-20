@@ -11,7 +11,7 @@ pool:
   vmImage: ubuntu-latest
 
 jobs:
-- job: Scan the ubuntu image
+- job: scan
   steps:
   - task: trivy@1
     inputs:
