@@ -20,7 +20,7 @@ jobs:
       command: "Build an Image"
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample'
-  - script: |
+  - bash: |
       curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.32.1
       trivy -v      
   - task: CmdLine@2
