@@ -21,9 +21,7 @@ jobs:
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample'
   - script: |
-      sudo apt-get install rpm
-      wget https://github.com/aquasecurity/trivy/releases/download/v0.32.1/trivy_0.32.1_Linux-64bit.deb
-      sudo dpkg -i trivy_0.32.1_Linux-64bit.deb
+      curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sh -s -- -b /usr/local/bin v0.32.1
       trivy -v      
   - task: CmdLine@2
     displayName: "Run trivy scan"
