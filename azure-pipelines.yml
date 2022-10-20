@@ -19,4 +19,5 @@ jobs:
       debug: true
       image: 'nginx:1.19.6'
       devMode: true
+      exitCode: '0'
   
