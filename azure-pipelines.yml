@@ -10,10 +10,13 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-
-- task: trivy@1
-  inputs:
-    version: 'latest'
-    debug: true
-    image: 'vulnerables/web-dvwa'
-    devMode: true
+jobs:
+- job: scan
+  steps:
+  - task: trivy@1
+    inputs:
+      version: 'latest'
+      debug: true
+      image: 'vulnerables/web-dvwa'
+      devMode: true
+  
