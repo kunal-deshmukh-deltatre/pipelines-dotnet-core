@@ -15,4 +15,4 @@ jobs:
   steps:
   - task: trivy@1
     inputs:
-      image: ubuntu
+      image: vulnerables/web-dvwa
