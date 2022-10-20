@@ -22,7 +22,7 @@ jobs:
       imageName:  'sample' 
   - task: trivy@1
     inputs:
-      version: 'latest'
+      version: '0.32.0'
       docker: false
       image: "sample:latest"
   
