@@ -20,6 +20,17 @@ jobs:
       command: "Build an Image"
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample'
+  - script: |
+      sudo apt-get install rpm
+      wget https://github.com/aquasecurity/trivy/releases/download/v0.32.1/trivy_0.32.1_Linux-64bit.deb
+      sudo dpkg -i trivy_0.32.1_Linux-64bit.deb
+      trivy -v
+      displayName: 'Download and install Trivy'
+  - task: CmdLine@2
+    displayName: "Run trivy scan"
+    inputs:
+      script: |
+        trivy image sample:latest
   - task: CmdLine@2
     inputs:
       script: 'docker images'     
