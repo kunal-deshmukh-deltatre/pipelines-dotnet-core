@@ -14,12 +14,11 @@ jobs:
 - job: scan
 
   steps:
-  - task: Docker@1
+  - task: Docker@2
     displayName: Build Docker image for PR
     inputs:      
-      command: "Build an Image"
-      dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
-      imageName: 'sample:latest'
+      command: "build"
+      dockerFile: "$(Build.SourcesDirectory)/Dockerfile"      
   - task: trivy@1
     inputs:
       version: 'latest'
