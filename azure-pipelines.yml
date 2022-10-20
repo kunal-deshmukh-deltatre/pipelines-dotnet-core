@@ -22,6 +22,6 @@ jobs:
       imageName:  'sample'     
   - task: trivy@1
     inputs:
-      version: 'latest'
-      path: .
+      version: '0.9.0'
+      image: "sample:latest"
     
