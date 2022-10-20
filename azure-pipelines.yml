@@ -36,6 +36,8 @@ jobs:
   - task: trivy@1
     inputs:
       version: 'latest'
+      docker: false
       image: "sample"
+  
  
     
