@@ -17,7 +17,7 @@ jobs:
     inputs:
       version: 'latest'
       debug: true
-      image: 'nginx:1.19.6'
+      path: .
       devMode: true
       exitCode: '0'
   
