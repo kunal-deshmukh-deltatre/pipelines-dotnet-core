@@ -17,6 +17,6 @@ jobs:
     inputs:
       version: 'latest'
       debug: true
-      image: 'vulnerables/web-dvwa'
+      image: 'nginx:1.19.6'
       devMode: true
   
