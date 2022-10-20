@@ -12,8 +12,16 @@ pool:
 
 jobs:
 - job: scan
+
   steps:
+  - task: Docker@1
+    displayName: Build Docker image for PR
+    inputs:      
+      command: "Build an Image"
+      dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
+      imageName: 'sample:latest'
   - task: trivy@1
     inputs:
       version: 'latest'
+      image: 'sample:latest'
     
