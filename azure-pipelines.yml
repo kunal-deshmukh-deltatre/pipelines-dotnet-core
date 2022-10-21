@@ -9,13 +9,9 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
-variables:
-  runTrivy: 'false'
-
 
 jobs:
 - job: scan
-
   steps:
   - task: Docker@1
     condition: eq(variables.runTrivy,'true')
@@ -23,12 +19,14 @@ jobs:
     inputs:      
       command: "Build an Image"
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
-      imageName:  'sample' 
-  - template: template.yml
-    parameters:
-      CONTAINER_SCANNING: 'true'
-      CONTAINER_FAIL_ON_ERROR: 0
-    
+      imageName:  'sample'   
+  - task: trivy@1   
+    inputs:
+      version: 'latest'
+      docker: false
+      image: "sample:latest"
+      aquaKey: '4bwsbokT452XYMn0JKfjK0'
+      aquaSecret: 'SPgT3W9Kyj7zE6FuibgswoF1NzD9I6TiTgb'
   
  
     
