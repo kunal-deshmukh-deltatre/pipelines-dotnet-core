@@ -35,7 +35,7 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        trivy image -f json -o results.json sample:latest
+        trivy image --security-checks vuln,config,secret -f json -o results.json sample:latest
   
   - task: CmdLine@2
     inputs:
