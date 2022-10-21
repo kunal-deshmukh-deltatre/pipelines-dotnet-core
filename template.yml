@@ -1,0 +1,12 @@
+parameters:
+  CONTAINER_SCANNING: 'false'
+  CONTAINER_FAIL_ON_ERROR: 0
+ 
+steps:
+  - task: trivy@1
+    condition: eq(parameters.CONTAINER_SCANNING,'true')
+    inputs:
+      version: 'latest'
+      docker: false
+      image: "sample:latest"
+ 
