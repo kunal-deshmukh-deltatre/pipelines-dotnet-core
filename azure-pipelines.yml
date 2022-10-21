@@ -36,7 +36,11 @@ jobs:
     inputs:
       script: |
         trivy image -f json -o results.json golang:1.12-alpine
-
+  - task: PublishPipelineArtifact@1
+    inputs:
+      targetPath: '$(Pipeline.Workspace)'
+      artifact: '*.json'
+      publishLocation: 'pipeline'
   
  
     
