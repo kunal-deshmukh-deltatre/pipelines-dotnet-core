@@ -25,9 +25,9 @@ jobs:
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample' 
   - template: template.yml
-      parameters:
-        CONTAINER_SCANNING: 'true'
-        CONTAINER_FAIL_ON_ERROR: 0
+    parameters:
+      CONTAINER_SCANNING: 'true'
+      CONTAINER_FAIL_ON_ERROR: 0
     
   
  
