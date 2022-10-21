@@ -9,6 +9,9 @@ trigger:
 
 pool:
   vmImage: ubuntu-latest
+variables:
+  runTrivy: false
+
 
 jobs:
 - job: scan
@@ -21,8 +24,9 @@ jobs:
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample' 
   - task: trivy@1
+    condition: eq(variables.runTrivy,true)
     inputs:
-      version: 'v0.32.0'
+      version: 'latest'
       docker: false
       image: "sample:latest"
   
