@@ -22,8 +22,9 @@ jobs:
       imageName:  'sample'   
   - task: trivy@1   
     inputs:
-      version: 'latest'
+      version: 'v0.32.0'
       docker: false
+      devMode: true
       image: "sample:latest"
       aquaKey: '4bwsbokT452XYMn0JKfjK0'
       aquaSecret: 'SPgT3W9Kyj7zE6FuibgswoF1NzD9I6TiTgb'
