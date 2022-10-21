@@ -4,7 +4,7 @@ parameters:
  
 steps:
   - task: trivy@1
-    condition: eq(parameters.CONTAINER_SCANNING,'true')
+    condition: eq($(parameters.CONTAINER_SCANNING),'true')
     inputs:
       version: 'latest'
       docker: false
