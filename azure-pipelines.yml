@@ -13,8 +13,7 @@ pool:
 jobs:
 - job: scan
   steps:
-  - task: Docker@1
-    condition: eq(variables.runTrivy,'true')
+  - task: Docker@1    
     displayName: Build Docker image for PR
     inputs:      
       command: "Build an Image"
