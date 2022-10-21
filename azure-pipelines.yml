@@ -10,7 +10,7 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 variables:
-  runTrivy: false
+  runTrivy: 'false'
 
 
 jobs:
@@ -18,13 +18,14 @@ jobs:
 
   steps:
   - task: Docker@1
+    condition: eq(variables.runTrivy,'true')
     displayName: Build Docker image for PR
     inputs:      
       command: "Build an Image"
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample' 
   - task: trivy@1
-    condition: eq(variables.runTrivy,true)
+    condition: eq(variables.runTrivy,'true')
     inputs:
       version: 'latest'
       docker: false
