@@ -24,12 +24,11 @@ jobs:
       command: "Build an Image"
       dockerFile: "$(Build.SourcesDirectory)/Dockerfile"
       imageName:  'sample' 
-  - task: trivy@1
-    condition: eq(variables.runTrivy,'true')
-    inputs:
-      version: 'latest'
-      docker: false
-      image: "sample:latest"
+  - template: template.yml
+      parameters:
+        CONTAINER_SCANNING: 'true'
+        CONTAINER_FAIL_ON_ERROR: 0
+    
   
  
     
