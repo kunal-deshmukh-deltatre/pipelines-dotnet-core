@@ -42,7 +42,8 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |        
-        ls /tmp/
+        ls /tmp/trivy
+        cp /tmp/trivy/$(Build.ArtifactStagingDirectory) 
         echo "$(Agent.WorkFolder)"
         echo "$(Agent.TempDirectory)"
   
