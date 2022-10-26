@@ -25,7 +25,7 @@ jobs:
       docker: false
       devMode: true
       debug: true
-      image: "vulnerables/web-dvwa"
+      image: "sample:latest"
       aquaKey: '4bwsbokT452XYMn0JKfjK0'
       aquaSecret: 'SPgT3W9Kyj7zE6FuibgswoF1NzD9I6TiTgb'
   
