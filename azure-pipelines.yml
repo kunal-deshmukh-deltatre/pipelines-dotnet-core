@@ -43,7 +43,7 @@ jobs:
     inputs:
       script: |        
         ls /tmp
-        cp /tmp/trivy/ $(Build.ArtifactStagingDirectory) 
+        cp /tmp/trivy*.json $(Build.ArtifactStagingDirectory) 
         echo "$(Agent.WorkFolder)"
         echo "$(Agent.TempDirectory)"
   
