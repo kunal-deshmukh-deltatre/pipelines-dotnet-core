@@ -16,9 +16,8 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        ls /usr
-        ls /usr/bin
-        ls /temp/
+        
+        ls /tmp/
         echo "$(Agent.WorkFolder)"
         echo "$(Agent.TempDirectory)"
   # - task: Docker@1    
