@@ -29,23 +29,23 @@ jobs:
       aquaKey: '4bwsbokT452XYMn0JKfjK0'
       aquaSecret: 'SPgT3W9Kyj7zE6FuibgswoF1NzD9I6TiTgb'
   
-  - script: |
-       curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.32.1
-       trivy -v
-    displayName: 'Download and install Trivy'
-  - task: CmdLine@2
-    inputs:
-      script: |
-        trivy image --security-checks vuln,config,secret -f json -o results.json vulnerables/web-dvwa
+  # - script: |
+  #      curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.32.1
+  #      trivy -v
+  #   displayName: 'Download and install Trivy'
+  # - task: CmdLine@2
+  #   inputs:
+  #     script: |
+  #       trivy image --security-checks vuln,config,secret -f json -o results.json vulnerables/web-dvwa
   
-  - task: CmdLine@2
-    inputs:
-      script: |
-        cat results.json
+  # - task: CmdLine@2
+  #   inputs:
+  #     script: |
+  #       cat results.json
   
   - task: CopyFiles@2
     inputs:
-      contents: '*.json'
+      contents: '/tmp/trivy/*.json'
       targetFolder: $(Build.ArtifactStagingDirectory)
   - task: PublishBuildArtifacts@1
     inputs:
