@@ -27,8 +27,11 @@ jobs:
       devMode: true
       debug: true
       image: "sample:latest"
-      aquaKey: '4bwsbokT452XYMn0JKfjK0'
-      aquaSecret: 'SPgT3W9Kyj7zE6FuibgswoF1NzD9I6TiTgb'
+  - task: trivy-reporter-task@2
+    inputs:
+      reportServerEndpoint: 'trivy-reporter'
+      scannerResultsFile: 'default'
+
   
   # - script: |
   #      curl -sfL https://raw.githubusercontent.com/aquasecurity/trivy/main/contrib/install.sh | sudo sh -s -- -b /usr/local/bin v0.32.1
