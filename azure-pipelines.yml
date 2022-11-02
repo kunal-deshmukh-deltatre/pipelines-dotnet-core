@@ -27,7 +27,8 @@ jobs:
       devMode: true
       debug: true
       image: "sample:latest"
-  - task: trivy-reporter-task@2
+  
+  - task: TrivyReporter@2
     inputs:
       reportServerEndpoint: 'trivy-reporter'
       scannerResultsFile: 'default'
