@@ -2,7 +2,9 @@
 # They are provided by a third-party and are governed by
 # separate terms of service, privacy policy, and support
 # documentation.
-
+env:
+    SYSDIG_SECURE_ENDPOINT: "https://eu1.app.sysdig.com"     
+   
 name: Sysdig - Build, scan, push and upload sarif report
 
 on:
@@ -35,25 +37,34 @@ jobs:
       # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag below
       run: docker build . --file Dockerfile --tag ${{ github.repository }}:latest
 
-    - name: Sysdig Secure Inline Scan
-      id: scan
-      uses: sysdiglabs/scan-action@768d7626a14897e0948ea89c8437dd46a814b163
+    - name: Setup cache
+      uses: actions/cache@v3
       with:
-        # Tag of the image to analyse.
-        # Change ${{ github.repository }} variable by another image name if you want but don't forget changing also image-tag above
-        image-tag: ${{ github.repository }}:latest
-        # API token for Sysdig Scanning auth
-        sysdig-secure-token: ${{ secrets.SYSDIG_SECURE_TOKEN}}
-        # Sysdig secure endpoint. Please read: https://docs.sysdig.com/en/docs/administration/saas-regions-and-ip-ranges/
-        # US-East https://secure.sysdig.com
-        # US-West https://us2.app.sysdig.com
-        # EU      https://eu1.app.sysdig.com
-        sysdig-secure-url: https://eu1.app.sysdig.com
-        dockerfile-path: ./Dockerfile
-        input-type: docker-daemon
-        ignore-failed-scan: true
-        # Sysdig inline scanner requires privileged rights
-        run-as-user: root
+        path: cache
+        key: ${{ runner.os }}-cache-${{ hashFiles('**/sysdig-cli-scanner', '**/latest_version.txt', '**/db/main.db.meta.json', '**/scanner-cache/inlineScannerCache.db') }}
+        restore-keys: ${{ runner.os }}-cache-
+
+    - name: Download sysdig-cli-scanner if needed
+      run:  |
+        curl -sLO https://download.sysdig.com/scanning/sysdig-cli-scanner/latest_version.txt
+        mkdir -p ${GITHUB_WORKSPACE}/cache/db/
+        if [ ! -f ${GITHUB_WORKSPACE}/cache/latest_version.txt ] || [ $(cat ./latest_version.txt) != $(cat ${GITHUB_WORKSPACE}/cache/latest_version.txt) ]; then
+          cp ./latest_version.txt ${GITHUB_WORKSPACE}/cache/latest_version.txt
+          curl -sL -o ${GITHUB_WORKSPACE}/cache/sysdig-cli-scanner "https://download.sysdig.com/scanning/bin/sysdig-cli-scanner/$(cat ${GITHUB_WORKSPACE}/cache/latest_version.txt)/linux/amd64/sysdig-cli-scanner"
+          chmod +x ${GITHUB_WORKSPACE}/cache/sysdig-cli-scanner
+        else
+          echo "sysdig-cli-scanner latest version already downloaded"
+        fi
+    - name: Scan the image using sysdig-cli-scanner
+      env:
+        SECURE_API_TOKEN: ${{ secrets.SECURE_API_TOKEN }}
+      run: |
+        ${GITHUB_WORKSPACE}/cache/sysdig-cli-scanner \
+          --apiurl ${SYSDIG_SECURE_ENDPOINT} \
+          ${{ github.repository }}:latest \
+          --console-log \
+          --dbpath=${GITHUB_WORKSPACE}/cache/db/ \
+          --cachepath=${GITHUB_WORKSPACE}/cache/scanner-cache/
 
     - uses: github/codeql-action/upload-sarif@v2
       #Upload SARIF file
