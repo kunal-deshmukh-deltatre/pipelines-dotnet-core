@@ -65,7 +65,7 @@ jobs:
           --console-log \
           --dbpath=${GITHUB_WORKSPACE}/cache/db/ \
           --cachepath=${GITHUB_WORKSPACE}/cache/scanner-cache/ \ 
-          --policy test-pipeline-policy
+          --policy=test-pipeline-policy
 
     - uses: github/codeql-action/upload-sarif@v2
       #Upload SARIF file
