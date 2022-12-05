@@ -29,13 +29,11 @@ jobs:
           sarif_file: 'trivy-results.sarif'
           
       - name: Run Trivy vulnerability scanner in fs mode
-        uses: anandg112/trivy-action@feat/add-skip-dirs-option
+        uses: aquasecurity/trivy-action@master
         with:
-          scan-type: 'fs'
-          ignore-unfixed: true
+          scan-type: 'fs'         
           format: 'sarif'          
-          output: 'trivy-results-fs.sarif'          
-          skip-dirs: "ignored-dir"
+          output: 'trivy-results-fs.sarif'                  
 
       - name: Upload Trivy scan results to GitHub Security tab
         uses: github/codeql-action/upload-sarif@v2
