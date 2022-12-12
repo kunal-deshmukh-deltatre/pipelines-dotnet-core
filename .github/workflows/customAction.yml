@@ -15,7 +15,7 @@ jobs:
       with:
         image-ref: 'docker.io/my-organization/my-app:${{ github.sha }}'
         format: 'sarif'
-        output: 'trivy-results.sarif'
+        output: 'trivy_results.json'
 
     - name: Upload Results
       id: hello
