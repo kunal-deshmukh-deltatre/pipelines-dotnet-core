@@ -19,7 +19,7 @@ jobs:
 
     - name: Upload Results
       id: hello
-      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.2
+      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.3
       with:
         milliseconds: 1000
      
