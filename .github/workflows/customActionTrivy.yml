@@ -19,7 +19,8 @@ jobs:
 
     - name: Upload Results
       id: hello
-      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.3
+      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.4
       with:
-        milliseconds: 1000
+        endpointUrl: 'https://trivyscannerapi.azurewebsites.net/api/scanner-api-function'
+        apiKey: 'AT9ztjr44HWJ0sA1kxHlB_XXI3TaI2Yeh9zMVbidSR_sAzFuhz1Nng=='
      
