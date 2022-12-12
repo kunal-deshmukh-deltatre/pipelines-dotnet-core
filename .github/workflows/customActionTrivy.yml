@@ -17,9 +17,8 @@ jobs:
         format: 'json'
         output: 'trivy_results.json'
 
-    - name: Upload Results
-      id: hello
-      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.4
+    - name: Upload Results     
+      uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.5
       with:
         endpointUrl: 'https://trivyscannerapi.azurewebsites.net/api/scanner-api-function'
         apiKey: 'AT9ztjr44HWJ0sA1kxHlB_XXI3TaI2Yeh9zMVbidSR_sAzFuhz1Nng=='
