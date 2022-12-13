@@ -13,6 +13,7 @@ namespace pipelines_dotnet_core
 {
     public class Program
     {
+        string secret="ASIAJLVYNHUWCPKOPSYQ";
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
