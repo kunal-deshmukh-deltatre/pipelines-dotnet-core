@@ -7,6 +7,10 @@ jobs:
   steps:
     - name: Checkout code
       uses: actions/checkout@v3
+    - name: Google OSV scanner
+      uses: google/osv-scanner@main
+      with:
+          args: -r .
     - name: Build an image from Dockerfile
       run: |
          docker build -t docker.io/my-organization/my-app:${{ github.sha }} .
@@ -21,15 +25,8 @@ jobs:
       uses: kunal-deshmukh-deltatre/trivy-reporter-ts@v1.16
       with:
         endpointUrl: 'https://trivyscannerapi.azurewebsites.net/api/scanner-api-function'
-        apiKey: ${{ secrets.API_KEY }}
-        
-    - name: Checkout code
-      uses: actions/checkout@v3
-      with:
-        fetch-depth: 0
-    - name: Google OSV scanner
-      uses: google/osv-scanner@main
-      with:
-          path: .
+        apiKey: ${{ secrets.API_KEY }}        
+  
+
 
      
